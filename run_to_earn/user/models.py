@@ -100,7 +100,7 @@ class Goal(models.Model):
         on_delete=models.CASCADE,
         verbose_name='User'
     )
-    goal = models.IntegerField(
+    goal = models.PositiveIntegerField(
         verbose_name='Goal'
     )
 

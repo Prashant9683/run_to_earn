@@ -9,6 +9,6 @@ from user.auth.views import strawberry_auth_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', strawberry_auth_view(GraphQLView.as_view(schema=schema))),
-    path('api-auth/', include('rest_framework.urls')),
+    path('user/v1/', include('user.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
