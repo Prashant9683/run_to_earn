@@ -2,8 +2,8 @@ import strawberry
 from strawberry.extensions import QueryDepthLimiter, ValidationCache, ParserCache, AddValidationRules
 from strawberry.tools import merge_types
 
-from users.graphql.mutations import UserMutations
-from users.graphql.queries.users import UserQueries
+from user.graphql.mutations import UserMutations
+from user.graphql.queries.users import UserQueries
 
 Mutations = merge_types('Mutations', (UserMutations,))
 Query = merge_types('Queries', (UserQueries,))

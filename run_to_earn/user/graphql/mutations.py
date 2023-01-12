@@ -1,7 +1,7 @@
 import strawberry
 
 from run_to_earn.utils.email import send_verification_email
-from users.graphql.inputs.user import ProfileInput
+from user.graphql.inputs.user import ProfileInput
 
 
 @strawberry.type
@@ -9,7 +9,7 @@ class UserMutations:
 
     @strawberry.mutation
     def signup(self, info, password: str, email: str, profile: ProfileInput) -> int:
-        from users.models import User
+        from user.models import User
         import re
 
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
@@ -34,7 +34,7 @@ class UserMutations:
 
     @strawberry.mutation
     def verify_email(self, info, email: str, otp: str) -> bool:
-        from users.models import VerificationOTP
+        from user.models import VerificationOTP
         try:
             otp = VerificationOTP.objects.get(user__email=email, otp=otp)
         except VerificationOTP.DoesNotExist:

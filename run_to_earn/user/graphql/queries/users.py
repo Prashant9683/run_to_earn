@@ -1,7 +1,7 @@
 from typing import Optional
 import strawberry
-from users.graphql.types.user import UserType
-from users.models import User
+from user.graphql.types.user import UserType
+from user.models import User
 
 
 @strawberry.type

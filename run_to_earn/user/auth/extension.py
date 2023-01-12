@@ -2,7 +2,7 @@ import jwt
 from strawberry.extensions import Extension
 from strawberry.types import ExecutionContext
 
-from users.auth import auth_settings
+from user.auth import auth_settings
 
 
 class JWTExtension(Extension):
@@ -40,7 +40,7 @@ class JWTExtension(Extension):
             token_payload = self.get_token_payload(tokenName="JWT_REFRESH_TOKEN")
             if token_payload and token_payload is not None:
                 try:
-                    from users.models import RefreshTokens
+                    from user.models import RefreshTokens
                     refreshTokenObj = RefreshTokens.objects.get(refreshToken=self.request.COOKIES['JWT_REFRESH_TOKEN'])
                     # refreshTokenObj = RefreshTokens.objects.get(refreshToken=token_payload["refreshToken"])
                     print("refreshTokenObj", refreshTokenObj)

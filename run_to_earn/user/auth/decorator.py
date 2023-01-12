@@ -15,7 +15,7 @@ def admin_required(resolver):
     @wraps(resolver)
     def wrapper(parent, info, *args, **kwargs):
         try:
-            from users.models import User
+            from user.models import User
             user = User.objects.get(id=info.context.userID)
             if user.role == "admin":
                 return resolver(parent, info, *args, **kwargs)

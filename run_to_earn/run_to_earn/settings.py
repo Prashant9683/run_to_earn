@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'strawberry.django',
+    'rest_framework',
     'user',
 ]
 

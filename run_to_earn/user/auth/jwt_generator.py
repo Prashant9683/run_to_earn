@@ -1,7 +1,7 @@
 import jwt
 from django.utils.timezone import datetime, timedelta
 
-from users.auth import auth_settings
+from user.auth import auth_settings
 
 
 def create_refresh_token(userID: int) -> str:
@@ -14,7 +14,7 @@ def create_refresh_token(userID: int) -> str:
         algorithm="HS256",
     )
 
-    from users.models import RefreshTokens
+    from user.models import RefreshTokens
     RefreshTokens.objects.create(
         user_id=userID,
         refreshToken=refreshToken,
