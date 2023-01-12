@@ -7,14 +7,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
-    email = models.EmailField(
-        unique=True,
-        verbose_name='Email Address'
-    )
+
     first_name = models.CharField(
         max_length=50,
         default='',
-        blank=True,
+        blank=False,
+        null=False,
         verbose_name='First Name',
         validators=[
             MaxLengthValidator(50)
@@ -28,6 +26,11 @@ class User(models.Model):
         validators=[
             MaxLengthValidator(50)
         ]
+    )
+
+    email = models.EmailField(
+        unique=True,
+        verbose_name='Email Address'
     )
 
     phone = PhoneNumberField(
@@ -48,3 +51,44 @@ class User(models.Model):
 
     def __str__(self):
         return self.email
+
+class RefreshTokens(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+    refreshToken = models.CharField(max_length=255)
+    issued = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "refreshTokens"
+        verbose_name_plural = "Refresh Tokens"
+        verbose_name = "Refresh Token"
+
+    def __str__(self):
+        return self.refreshToken
+
+__all__ = [
+    'RefreshTokens'
+]
+
+
+class VerificationOTP(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(
+        'user.User',
+        on_delete=models.CASCADE,
+        verbose_name='User'
+    )
+    otp = models.CharField(
+        max_length=50,
+        verbose_name='OTP'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.otp}'
+
+    class Meta:
+        verbose_name = 'Verification OTP'
+        verbose_name_plural = 'Verification OTPs'
