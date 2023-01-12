@@ -1,5 +1,5 @@
 from django.contrib import admin
-from user.models import User, RefreshTokens, VerificationOTP
+from user.models import User, RefreshTokens, VerificationOTP, Goal
 # Register your models here.
 
 @admin.register(User)
@@ -18,3 +18,8 @@ class RefreshTokenAdmin(admin.ModelAdmin):
 class VerificationOTPAdmin(admin.ModelAdmin):
     list_display = ['user', 'otp']
     readonly_fields = ['user', 'otp', 'created_at']
+
+@admin.register(Goal)
+class GoalAdmin(admin.ModelAdmin):
+    list_display = ['user', 'goal']
+    readonly_fields = ['user', 'goal']

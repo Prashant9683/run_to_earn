@@ -92,3 +92,14 @@ class VerificationOTP(models.Model):
     class Meta:
         verbose_name = 'Verification OTP'
         verbose_name_plural = 'Verification OTPs'
+
+class Goal(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(
+        'user.User',
+        on_delete=models.CASCADE,
+        verbose_name='User'
+    )
+    goal = models.IntegerField(
+        verbose_name='Goal'
+    )
