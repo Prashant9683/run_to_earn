@@ -103,3 +103,11 @@ class Goal(models.Model):
     goal = models.IntegerField(
         verbose_name='Goal'
     )
+
+    class Meta:
+        db_table = 'goal'
+        verbose_name = 'Goal'
+        verbose_name_plural = 'Goals'
+
+    def __str__(self):
+        return self.goal
